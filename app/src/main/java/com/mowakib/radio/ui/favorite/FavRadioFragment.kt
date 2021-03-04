@@ -21,18 +21,23 @@ import com.mowakib.radio.player.PlayerActivity.Companion.EXTRA_URL
 class FavRadioFragment : Fragment() {
 
     private lateinit var favRadioViewModel: FavRadioViewModel
-    private var binding: FragmentFavRadioBinding? = null
+    private var _binding: FragmentFavRadioBinding? = null
 
     private var favRadioAdapter: FavRadioAdapter? = null
+    private val binding get() = _binding!!
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         favRadioViewModel =
             ViewModelProvider(this).get(FavRadioViewModel::class.java)
 
-        binding = FragmentFavRadioBinding.bind(view)
-        binding?.lifecycleOwner = viewLifecycleOwner
-        binding?.viewModel = favRadioViewModel
+        _binding = FragmentFavRadioBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = favRadioViewModel
 
         favRadioAdapter = FavRadioAdapter(RadioClick { radio ->
             val intent = Intent(requireContext(), PlayerActivity::class.java).apply {
@@ -45,15 +50,24 @@ class FavRadioFragment : Fragment() {
             startActivity(intent)
         })
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         favRadioViewModel.favRadios.observe(viewLifecycleOwner, {
             it?.apply {
                 favRadioAdapter?.radios = it
             }
         })
-
-        binding!!.recyclerView.apply {
+        binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = favRadioAdapter
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
