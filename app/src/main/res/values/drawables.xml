@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="exo_notification_next">@drawable/ic_next</drawable>
+    <drawable name="exo_notification_pause">@drawable/ic_pause</drawable>
+    <drawable name="exo_notification_play">@drawable/ic_play</drawable>
+    <drawable name="exo_notification_previous">@drawable/ic_previous</drawable>
+    <drawable name="exo_notification_small_icon">@drawable/ic_stat_name</drawable>
+    <drawable name="exo_notification_stop">@drawable/ic_close</drawable>
+    <drawable name="exo_styled_controls_pause">@drawable/ic_pause</drawable>
+    <drawable name="exo_styled_controls_play">@drawable/ic_play</drawable>
+    <drawable name="exo_fav">@drawable/ic_favorite</drawable>
+</resources>

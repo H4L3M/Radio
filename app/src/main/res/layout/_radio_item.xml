@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="radio"
+            type="com.mowakib.radio.model.Radio" />
+
+        <variable
+            name="radioCallback"
+            type="com.mowakib.radio.adapter.RadioClick" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:onClick="@{() -> radioCallback.onClick(radio)}">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/radio_logo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_logo"
+            android:padding="4dp"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:src="@{radio.logo}"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/radio_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/radio_logo"
+            app:layout_constraintStart_toEndOf="@+id/radio_logo"
+            app:layout_constraintTop_toTopOf="@+id/radio_logo"
+            app:text="@{radio.name}"
+            tools:text="@tools:sample/full_names" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="@color/grey_600"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/radio_name" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
