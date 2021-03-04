@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.mowakib.emp.Emp
 import com.mowakib.radio.adapter.FavRadioAdapter
 import com.mowakib.radio.adapter.RadioAdapter
 import com.mowakib.radio.adapter.RadioClick
@@ -18,6 +20,24 @@ import com.mowakib.radio.player.PlayerActivity
 import com.mowakib.radio.player.PlayerActivity.Companion.EXTRA_LOGO
 import com.mowakib.radio.player.PlayerActivity.Companion.EXTRA_NAME
 import com.mowakib.radio.player.PlayerActivity.Companion.EXTRA_URL
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.constraintlayout.utils.widget.ImageFilterView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.get
+import com.bumptech.glide.load.resource.drawable.DrawableDecoderCompat
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.mowakib.radio.R
+import com.mowakib.radio.databinding.ExoAudioPlayerBinding
+import com.mowakib.radio.databinding.PlayerActivityBinding
+
 
 class RadioFragment : Fragment() {
 
@@ -37,19 +57,20 @@ class RadioFragment : Fragment() {
             ViewModelProvider(this).get(RadioViewModel::class.java)
 
         _binding = FragmentRadioBinding.inflate(inflater, container, false)
-
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = radioViewModel
+            binding.lifecycleOwner = viewLifecycleOwner
+            binding.viewModel = radioViewModel
 
         radioAdapter = RadioAdapter(RadioClick { radio ->
-            val intent = Intent(requireContext(), PlayerActivity::class.java).apply {
-                action = IntentUtil.ACTION_VIEW
-                data = Uri.parse(radio.url)
-                putExtra(EXTRA_NAME, radio.name)
-                putExtra(EXTRA_LOGO, radio.logo)
-                putExtra(EXTRA_URL, radio.url)
-            }
-            startActivity(intent)
+
+            binding.playerView.visibility = View.VISIBLE
+
+            val radioName = binding.playerView.findViewById<TextView>(R.id.exo_text)
+            radioName.text = radio.name
+
+            val radioLogo = binding.playerView.findViewById<ImageView>(R.id.radio_logo)
+            radioLogo.setImageResource(R.drawable.notif_bg)
+
+            Emp.with(requireContext()).init(binding.playerView).load(radio.url)
         })
 
         return binding.root

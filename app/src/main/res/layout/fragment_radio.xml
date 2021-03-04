@@ -10,7 +10,7 @@
             type="com.mowakib.radio.ui.radio.RadioViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_main"
@@ -22,13 +22,22 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="?actionBarSize"
             app:listRadio="@{viewModel.radios}"
             tools:itemCount="12"
             tools:listitem="@layout/_radio_item" />
+
+        <com.google.android.exoplayer2.ui.StyledPlayerView
+            android:id="@+id/player_view"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="bottom"
+            android:visibility="gone"
+            app:auto_show="true"
+            app:controller_layout_id="@layout/exo_audio_player"
+            app:hide_on_touch="false"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            app:show_timeout="0" />
 
 
         <!--        <com.google.android.material.circularreveal.cardview.CircularRevealCardView xmlns:app="http://schemas.android.com/apk/res-auto"-->
@@ -51,5 +60,5 @@
         <!--                app:hide_on_touch="false" />-->
         <!--        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

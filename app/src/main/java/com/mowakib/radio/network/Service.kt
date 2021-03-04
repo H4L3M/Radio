@@ -22,4 +22,4 @@ object Network {
 }
 
 private const val BASE_URL = "https://raw.githubusercontent.com/"
-private const val SPECIFIC_RADIO = "du1p3n/radio/main/bbc"
+private const val SPECIFIC_RADIO = "H4L3M/WorldRadio/main/Test"

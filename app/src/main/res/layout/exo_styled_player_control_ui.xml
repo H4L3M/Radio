@@ -15,7 +15,6 @@
             android:id="@+id/exo_progress"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="36dp"
             app:buffered_color="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/exo_play_pause"
             app:layout_constraintEnd_toEndOf="@+id/exo_play_pause"
@@ -28,7 +27,6 @@
             android:id="@+id/radio_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:marqueeRepeatLimit="marquee_forever"
             android:maxLines="1"
             android:textColor="@android:color/white"
@@ -58,6 +56,7 @@
             style="@style/ExoStyledControls.Button.Center.PlayPause"
             android:layout_width="36dp"
             android:layout_height="36dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
