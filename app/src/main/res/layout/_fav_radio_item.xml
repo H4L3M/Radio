@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="radio"
+            type="com.mowakib.radio.model.Radio" />
+
+        <variable
+            name="radioCallback"
+            type="com.mowakib.radio.adapter.RadioClick" />
+    </data>
+
+    <com.google.android.material.circularreveal.CircularRevealFrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:onClick="@{() -> radioCallback.onClick(radio)}">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/radio_logo"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="center|center_horizontal"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_logo"
+            android:cropToPadding="false"
+            android:padding="4dp"
+            android:scaleType="centerInside"
+            app:src="@{radio.logo}"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    </com.google.android.material.circularreveal.CircularRevealFrameLayout>
+</layout>

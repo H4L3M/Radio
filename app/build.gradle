@@ -35,12 +35,12 @@ android {
         debug {
             jniDebuggable = true
             //---------------------------
-            shrinkResources true
-            minifyEnabled true
-            proguardFiles = [
-                    "proguard-rules.txt",
-                    getDefaultProguardFile('proguard-android.txt')
-            ]
+//            shrinkResources true
+//            minifyEnabled true
+//            proguardFiles = [
+//                    "proguard-rules.txt",
+//                    getDefaultProguardFile('proguard-android.txt')
+//            ]
         }
     }
 
@@ -71,7 +71,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //activity
-//    implementation "androidx.activity:activity-ktx:1.1.0"
+    implementation "androidx.activity:activity-ktx:1.2.0"
 
     //fragment
 //    implementation "androidx.fragment:fragment-ktx:1.2.5"

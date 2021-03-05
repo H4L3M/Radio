@@ -1,4 +1,4 @@
-package com.mowakib.radio.ui.radio
+package com.mowakib.radio.ui.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 import com.mowakib.radio.database.getRadioDatabase
 import com.mowakib.radio.repo.RadiosRepository
 
-class RadioViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = getRadioDatabase(application)
     private val videosRepository = RadiosRepository(database)
