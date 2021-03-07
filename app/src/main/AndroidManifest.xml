@@ -20,7 +20,8 @@
         <activity
             android:name="com.mowakib.radio.ui.main.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Radio.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

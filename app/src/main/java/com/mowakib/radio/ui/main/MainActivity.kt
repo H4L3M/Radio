@@ -1,20 +1,25 @@
 package com.mowakib.radio.ui.main
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.mowakib.emp.Emp
 import com.mowakib.radio.R
 import com.mowakib.radio.adapter.FavRadioAdapter
@@ -24,16 +29,14 @@ import com.mowakib.radio.database.FavDatabaseRadio
 import com.mowakib.radio.database.RadiosDatabase
 import com.mowakib.radio.database.getRadioDatabase
 import com.mowakib.radio.databinding.ActivityMainBinding
-import com.mowakib.radio.utils.fadeDown
+import com.mowakib.radio.utils.*
 import com.mowakib.radio.utils.fadeUp
-import com.mowakib.radio.utils.slideDown
-import com.mowakib.radio.utils.slideUp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -46,30 +49,39 @@ class MainActivity : AppCompatActivity() {
     private lateinit var database: RadiosDatabase
     private lateinit var emp: Emp
 
+    private lateinit var navigationView: NavigationView
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var playerView: StyledPlayerView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var favRecyclerView: RecyclerView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        navigationView = binding.navView
+        drawerLayout = binding.drawerLayout
+        playerView = binding.appBarMain.contentMain.playerView
+        recyclerView = binding.appBarMain.contentMain.recyclerView
+        favRecyclerView = binding.appBarMain.contentMain.favRecyclerView
+
         database = getRadioDatabase(applicationContext)
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        binding.contentMain.lifecycleOwner = this@MainActivity
-        binding.contentMain.viewModel = mainViewModel
+        binding.appBarMain.contentMain.lifecycleOwner = this@MainActivity
+        binding.appBarMain.contentMain.viewModel = mainViewModel
 
-        val playerView = binding.contentMain.playerView
+
         emp = Emp.get().init(this, playerView)
 
-        radioAdapter = getRadioAdapter(playerView)
-        favRadioAdapter = getFavRadioAdapter(playerView)
-
-
-        val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
+        radioAdapter = getRadioAdapter()
+        favRadioAdapter = getFavRadioAdapter()
 
         //drawer transition
         val toggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
-            this, drawerLayout, null,
+            this, drawerLayout, binding.appBarMain.toolbar,
             R.string.app_name,
             R.string.app_name
         ) {
@@ -85,10 +97,40 @@ class MainActivity : AppCompatActivity() {
                 super.onDrawerSlide(drawerView, slideOffset)
             }
         }
-        toggle.isDrawerIndicatorEnabled = true
-        toggle.syncState()
         drawerLayout.addDrawerListener(toggle)
+//        toggle.isDrawerIndicatorEnabled = true
+        toggle.syncState()
+        navigationView.setNavigationItemSelectedListener(this)
 
+        switchToDark()
+
+    }
+
+    private fun switchToDark() {
+        val switch =
+            navigationView.getHeaderView(0).findViewById<SwitchMaterial>(R.id.switch_to_dark)
+
+        val isDark = getDarkMode(IS_DARK_MODE)
+        if (isDark) {
+            Toast.makeText(this, "$isDark", Toast.LENGTH_SHORT).show()
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            Toast.makeText(this, "$isDark", Toast.LENGTH_SHORT).show()
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
+        switch.isChecked = isDark
+        switch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Toast.makeText(this, "$isChecked", Toast.LENGTH_SHORT).show()
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                saveDarkMode(IS_DARK_MODE, isChecked)
+            } else {
+                Toast.makeText(this, "$isChecked", Toast.LENGTH_SHORT).show()
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                saveDarkMode(IS_DARK_MODE, isChecked)
+            }
+        }
     }
 
     override fun onStart() {
@@ -101,18 +143,18 @@ class MainActivity : AppCompatActivity() {
         })
         mainViewModel.favRadios.observe(this, { favRadios ->
             if (favRadios.isNotEmpty()) {
-                binding.contentMain.favoriteContainer.visibility = View.VISIBLE
+                binding.appBarMain.contentMain.favoriteContainer.visibility = View.VISIBLE
                 favRadios?.apply {
                     favRadioAdapter?.favRadio = favRadios
                 }
             }
         })
 
-        binding.contentMain.recyclerView.apply {
+        recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = radioAdapter
         }
-        binding.contentMain.favRecyclerView.apply {
+        favRecyclerView.apply {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = favRadioAdapter
@@ -144,7 +186,7 @@ class MainActivity : AppCompatActivity() {
         emp.stop()
     }
 
-    private fun getRadioAdapter(playerView: StyledPlayerView) =
+    private fun getRadioAdapter() =
         RadioAdapter(RadioClick { radio ->
             playerView.slideUp()
 
@@ -171,7 +213,7 @@ class MainActivity : AppCompatActivity() {
             emp.load(radio.url)
         })
 
-    private fun getFavRadioAdapter(playerView: StyledPlayerView) =
+    private fun getFavRadioAdapter() =
         FavRadioAdapter(RadioClick { radio ->
             playerView.slideUp().fadeUp()
 
@@ -200,4 +242,15 @@ class MainActivity : AppCompatActivity() {
             addRadioToFavorite(radio.name, radio.logo, radio.url, fav)
             emp.load(radio.url)
         })
+
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp()
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_home -> Toast.makeText(this, "0", Toast.LENGTH_SHORT).show()
+        }
+        return true
+    }
 }

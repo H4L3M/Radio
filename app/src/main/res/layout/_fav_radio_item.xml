@@ -14,23 +14,29 @@
             type="com.mowakib.radio.adapter.RadioClick" />
     </data>
 
-    <com.google.android.material.circularreveal.CircularRevealFrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:onClick="@{() -> radioCallback.onClick(radio)}">
+        android:layout_height="64dp"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp">
 
-        <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/radio_logo"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
             android:layout_width="?actionBarSize"
             android:layout_height="?actionBarSize"
-            android:layout_gravity="center|center_horizontal"
-            android:layout_margin="4dp"
-            android:background="@drawable/bg_logo"
-            android:cropToPadding="false"
-            android:padding="4dp"
-            android:scaleType="centerInside"
-            app:src="@{radio.logo}"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </com.google.android.material.circularreveal.CircularRevealFrameLayout>
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/radio_logo"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                app:src="@{radio.logo}"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

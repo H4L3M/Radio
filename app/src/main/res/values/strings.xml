@@ -59,4 +59,5 @@
     <string name="tab_text_2">Favorite</string>
     <string name="favorite_radios">Favorite Radios</string>
     <string name="all_radios">All Radios</string>
+    <string name="enable_dark_mode">Enable Dark Mode</string>
 </resources>
