@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.main.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@null"
         android:theme="@style/Theme.Radio.AppBarOverlay"
         app:elevation="0dp">
 
@@ -16,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@null"
             app:popupTheme="@style/Theme.Radio.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>

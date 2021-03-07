@@ -3,38 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable-anydpi-v24/ic_launcher_foreground.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/bg_logo.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/bg_main.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/bg_player.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_cancel.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_close.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_favorite.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_favorite_filled.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_favorite_outlined.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_home.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_menu_camera.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_next.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_pause.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_play.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_previous.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_stop.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/line.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/line_divider.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/side_nav_bar.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/_fav_radio_item.xml" value="0.17302052785923755" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/_radio_item.xml" value="0.3962962962962963" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/activity_main.xml" value="0.10833333333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/app_bar_main.xml" value="0.184375" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/content_main.xml" value="0.22333333333333336" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/exo_audio_player.xml" value="0.25" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/fragment_fav_radio.xml" value="0.184375" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/fragment_radio.xml" value="0.184375" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/nav_header_main.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/switch_item.xml" value="0.184375" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/menu/activity_main_drawer.xml" value="0.184375" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/drawable-mdpi/bg_play.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/drawable/bg_logo.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/drawable/bg_main.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/drawable/bg_seco.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/layout/_fav_radio_item.xml" value="0.75" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/layout/_radio_item.xml" value="0.209375" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/layout/activity_main.xml" value="0.209375" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/layout/app_bar_main.xml" value="0.209375" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/layout/content_main.xml" value="0.209375" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/layout/exo_audio_player.xml" value="0.25" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/layout/exo_styled_player_control_ui.xml" value="0.18981481481481483" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/layout/fragment_radio.xml" value="0.10182370820668693" />
+        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/layout/player_activity.xml" value="0.1" />
       </map>
     </option>
   </component>
