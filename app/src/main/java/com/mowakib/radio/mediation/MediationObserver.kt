@@ -54,6 +54,8 @@ class MediationObserver(private val activity: Activity) : LifecycleObserver {
     private fun showIronSourceInterAds() {
         if (isInterstitialReady()) {
             IronSource.showInterstitial()
+        } else {
+//            IronSource.load
         }
     }
 }

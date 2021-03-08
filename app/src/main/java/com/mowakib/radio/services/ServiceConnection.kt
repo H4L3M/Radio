@@ -16,25 +16,44 @@
 
 package com.mowakib.radio.services
 
-import android.content.ComponentName
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkRequest
+import android.os.Build
 
+/*
+You need to call the below method once. It register the callback and fire it when there is a change in network state.
+Here I used a Global Static Variable, So I can use it to access the network state in anyware of the application.
+*/
 
-class ServiceConnection(context: Context) {
-    val isConnected = MutableLiveData<Boolean>()
-        .apply { postValue(false) }
+// Network Check
+fun Context.registerNetworkCallback() {
+    try {
+        val connectivityManager =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val builder = NetworkRequest.Builder()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            connectivityManager.registerDefaultNetworkCallback(object :
+                ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: Network) {
+                    Variables.isNetworkConnected = true // Global Static Variable
+                }
 
-
-    companion object {
-        // For Singleton instantiation.
-        @Volatile
-        private var instance: ServiceConnection? = null
-
-        fun getInstance(context: Context, serviceComponent: ComponentName) =
-            instance ?: synchronized(this) {
-                instance ?: ServiceConnection(context)
-                    .also { instance = it }
+                override fun onLost(network: Network) {
+                    Variables.isNetworkConnected = false // Global Static Variable
+                }
             }
+            )
+        }
+        Variables.isNetworkConnected = false
+    } catch (e: Exception) {
+        Variables.isNetworkConnected = false
     }
 }
+
+object Variables {
+    // Global variable used to store network state
+    var isNetworkConnected = false
+}
+

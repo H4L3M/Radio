@@ -30,11 +30,14 @@ import com.mowakib.radio.database.RadiosDatabase
 import com.mowakib.radio.database.getRadioDatabase
 import com.mowakib.radio.databinding.ActivityMainBinding
 import com.mowakib.radio.mediation.MediationObserver
+import com.mowakib.radio.services.Variables
+import com.mowakib.radio.services.registerNetworkCallback
 import com.mowakib.radio.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -61,6 +64,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         navigationView = binding.navView
         drawerLayout = binding.drawerLayout
         playerView = binding.appBarMain.playerView
@@ -83,7 +87,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //drawer transition
         val toggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
-            this, drawerLayout, binding.appBarMain.toolbar,
+            this,
+            drawerLayout,
+            binding.appBarMain.toolbar,
             R.string.app_name,
             R.string.app_name
         ) {
@@ -106,6 +112,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         switchToDark()
 
+
+        //----
+        checkConn()
+
+    }
+
+    private fun checkConn() {
+        registerNetworkCallback()
+        if (Variables.isNetworkConnected) {
+            // Internet Connected
+            Toast.makeText(this, "connected", Toast.LENGTH_SHORT).show()
+        } else {
+            // Not Connected
+            Toast.makeText(this, "lost", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        bind()
     }
 
     private fun switchToDark() {
@@ -135,8 +161,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    fun bind() {
 
         mainViewModel.radios.observe(this, { radios ->
             radios?.apply {
