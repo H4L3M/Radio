@@ -546,5 +546,6 @@
     <color name="dark_bg_light_hint_text">#80FFFFFF</color>
 
     <color name="light_bg">#f4f7fa</color>
+    <color name="black_overlay">#66000000</color>
 
 </resources>

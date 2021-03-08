@@ -47,7 +47,7 @@
                     android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:scaleType="centerInside"
-                    app:src="@{radio.logo}"
+                    app:glideSrc="@{radio.logo}"
                     tools:srcCompat="@tools:sample/backgrounds/scenic" />
             </com.google.android.material.card.MaterialCardView>
 

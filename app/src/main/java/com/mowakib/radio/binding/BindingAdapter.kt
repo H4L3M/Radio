@@ -11,47 +11,32 @@ import com.mowakib.radio.R
 import com.mowakib.radio.adapter.FavRadioAdapter
 import com.mowakib.radio.adapter.RadioAdapter
 import com.mowakib.radio.model.Radio
+import com.mowakib.radio.utils.EXT
+import com.mowakib.radio.utils.IMGUR_BASE_URL
+import com.mowakib.radio.utils.requestBuilder
 
-@BindingAdapter("app:listRadio")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Radio>?) {
-    val adapter = recyclerView.adapter as RadioAdapter
-    adapter.submitList(data)
-}
-
-@BindingAdapter("app:listFavRadio")
-fun bindFavRecyclerView(recyclerView: RecyclerView, data: List<Radio>?) {
-    val adapter = recyclerView.adapter as FavRadioAdapter
-    adapter.submitList(data)
-}
-
-@BindingAdapter("app:src")
-fun bindImageView(imageView: ImageView, imgUrl: String?) {
-    imgUrl?.let {
-        if (imgUrl.length < 10) {
-            Glide.with(imageView.context).load("https://i.imgur.com/$imgUrl.png")
-                .apply(
-                    RequestOptions()
-                        .placeholder(R.drawable.loadin_animation)
-                        .error(R.drawable.logo_not_found)).into(imageView)
-        } else {
-            Glide.with(imageView.context)
-                .load(imgUrl)
-                .apply(
-                    RequestOptions()
-                        .placeholder(R.drawable.loadin_animation)
-                        .error(R.drawable.logo_not_found)).into(imageView)
-        }
+@BindingAdapter("app:listData")
+fun RecyclerView.bindData(listRadio: List<Radio>?) =
+    when (adapter) {
+        is RadioAdapter -> (adapter as RadioAdapter).submitList(listRadio)
+        is FavRadioAdapter -> (adapter as FavRadioAdapter).submitList(listRadio)
+        else -> throw ExceptionInInitializerError()
     }
-}
 
 @BindingAdapter("app:text")
-fun bindTextView(tvTextName: TextView, textName: String?) {
-    textName?.let {
-        tvTextName.text = it
-    }
+fun TextView.text(txt: String?) = txt?.apply { this@text.text = txt }
+
+@BindingAdapter("app:goneIfNotNull")
+fun View.goneIfNotNull(it: Any?) {
+    this.visibility = if (it != null) View.GONE else View.VISIBLE
 }
 
-@BindingAdapter("goneIfNotNull")
-fun goneIfNotNull(view: View, it: Any?) {
-    view.visibility = if (it != null) View.GONE else View.VISIBLE
+@BindingAdapter("app:goneIfNull")
+fun View.goneIfNull(it: Any?) {
+    this.visibility = if (it != null) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("app:show")
+fun View.show(isConnected: Boolean = false) {
+    this.visibility = if (isConnected) View.GONE else View.VISIBLE
 }

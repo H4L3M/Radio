@@ -13,9 +13,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.navigation.NavigationView
@@ -29,8 +29,8 @@ import com.mowakib.radio.database.FavDatabaseRadio
 import com.mowakib.radio.database.RadiosDatabase
 import com.mowakib.radio.database.getRadioDatabase
 import com.mowakib.radio.databinding.ActivityMainBinding
+import com.mowakib.radio.mediation.MediationObserver
 import com.mowakib.radio.utils.*
-import com.mowakib.radio.utils.fadeUp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navigationView = binding.navView
         drawerLayout = binding.drawerLayout
-        playerView = binding.appBarMain.contentMain.playerView
+        playerView = binding.appBarMain.playerView
         recyclerView = binding.appBarMain.contentMain.recyclerView
         favRecyclerView = binding.appBarMain.contentMain.favRecyclerView
 
@@ -73,6 +73,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding.appBarMain.contentMain.lifecycleOwner = this@MainActivity
         binding.appBarMain.contentMain.viewModel = mainViewModel
 
+
+        lifecycle.addObserver(MediationObserver(this))
 
         emp = Emp.get().init(this, playerView)
 
@@ -143,7 +145,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         })
         mainViewModel.favRadios.observe(this, { favRadios ->
             if (favRadios.isNotEmpty()) {
-                binding.appBarMain.contentMain.favoriteContainer.visibility = View.VISIBLE
                 favRadios?.apply {
                     favRadioAdapter?.favRadio = favRadios
                 }
@@ -155,8 +156,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             adapter = radioAdapter
         }
         favRecyclerView.apply {
-            layoutManager =
-                LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = GridLayoutManager(this@MainActivity, 5)
             adapter = favRadioAdapter
         }
     }
@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 isSelected = true
             }
             playerView.findViewById<AppCompatImageView>(R.id.radio_logo).apply {
-                Glide.with(this@MainActivity).load(radio.logo).into(this)
+                loadImage(radio.logo)
             }
 
             playerView.findViewById<AppCompatImageView>(R.id.close_radio).apply {
@@ -221,10 +221,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 text = radio.name
                 isSelected = true
             }
-            playerView.findViewById<AppCompatImageView>(R.id.radio_logo).also {
+            playerView.findViewById<AppCompatImageView>(R.id.radio_logo).apply {
                 lifecycleScope.launchWhenResumed {
                     delay(100)
-                    Glide.with(this@MainActivity).load(radio.logo).into(it)
+                    loadImage(radio.logo)
                 }
             }
 

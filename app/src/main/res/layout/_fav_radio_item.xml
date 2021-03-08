@@ -14,32 +14,30 @@
             type="com.mowakib.radio.adapter.RadioClick" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="4dp"
         android:onClick="@{() -> radioCallback.onClick(radio)}"
-        android:paddingStart="2dp"
-        android:paddingEnd="2dp">
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card"
-            android:layout_width="?actionBarSize"
-            android:layout_height="?actionBarSize"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/radio_logo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            app:glideSrc="@{radio.logo}"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    </com.google.android.material.card.MaterialCardView>
 
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:id="@+id/radio_logo"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:scaleType="centerInside"
-                app:src="@{radio.logo}"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
-        </com.google.android.material.card.MaterialCardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
