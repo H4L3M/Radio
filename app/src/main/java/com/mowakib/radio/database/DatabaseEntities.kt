@@ -9,7 +9,7 @@ data class DatabaseRadio constructor(
     @PrimaryKey
     val name: String,
     val logo: String,
-    val url: String,
+    val url: String
 )
 
 fun List<DatabaseRadio>.asDomainModel(): List<Radio> {
@@ -17,7 +17,7 @@ fun List<DatabaseRadio>.asDomainModel(): List<Radio> {
         Radio(
             name = it.name,
             logo = it.logo,
-            url = it.url,
+            url = it.url
         )
     }
 }
@@ -27,8 +27,7 @@ data class FavDatabaseRadio(
     @PrimaryKey
     val name: String,
     val logo: String,
-    val url: String,
-    val most: Long = 0,
+    val url: String
 )
 
 fun List<FavDatabaseRadio>.asFavDomainModel(): List<Radio> {
@@ -36,7 +35,7 @@ fun List<FavDatabaseRadio>.asFavDomainModel(): List<Radio> {
         Radio(
             name = it.name,
             logo = it.logo,
-            url = it.url,
+            url = it.url
         )
     }
 }

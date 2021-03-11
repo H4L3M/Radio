@@ -3,10 +3,10 @@ package com.mowakib.radio.ui.main
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import com.mowakib.radio.database.getRadioDatabase
-import com.mowakib.radio.mediation.MediationObserver
 import com.mowakib.radio.repo.RadiosRepository
+import kotlinx.coroutines.launch
+
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -21,4 +21,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val radios = videosRepository.radios
     val favRadios = videosRepository.favRadios
+
 }

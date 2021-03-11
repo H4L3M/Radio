@@ -510,7 +510,11 @@
 
     <color name="grey_900">#212121</color>
 
+    <color name="grey_950">#171717</color>
+
     <color name="black">#000000</color>
+
+    <color name="black_950">#010101</color>
 
     <color name="white">#FFFFFF</color>
 
@@ -545,7 +549,12 @@
 
     <color name="dark_bg_light_hint_text">#80FFFFFF</color>
 
-    <color name="light_bg">#f4f7fa</color>
+    <color name="bg_light">#C4D4E4</color>
+
+    <color name="bg_dark">@color/black</color>
+
     <color name="black_overlay">#66000000</color>
+    <color name="grey_transparent_75">#BF171717</color>
+
 
 </resources>

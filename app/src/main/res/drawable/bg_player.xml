@@ -5,17 +5,16 @@
         <shape android:shape="rectangle">
             <size
                 android:width="300dp"
-                android:height="160dp" />
+                android:height="56dp" />
             <gradient
                 android:endColor="@color/teal_600"
                 android:startColor="@color/blue_600" />
-            <corners
-                android:topLeftRadius="36dp"
-                android:topRightRadius="36dp" />
+            <corners android:radius="24dp" />
         </shape>
     </item>
 
     <item
+        android:bottom="2dp"
         android:left="2dp"
         android:right="2dp"
         android:top="2dp">
@@ -23,7 +22,8 @@
             <size
                 android:width="280dp"
                 android:height="20dp" />
-            <solid android:color="?colorPrimary" />
-            <corners android:topLeftRadius="36dp" android:topRightRadius="36dp" />        </shape>
+            <solid android:color="?android:colorBackground" />
+            <corners android:radius="24dp" />
+        </shape>
     </item>
 </layer-list>

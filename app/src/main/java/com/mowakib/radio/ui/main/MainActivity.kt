@@ -7,19 +7,20 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.switchmaterial.SwitchMaterial
 import com.mowakib.emp.Emp
 import com.mowakib.radio.R
 import com.mowakib.radio.adapter.FavRadioAdapter
@@ -29,20 +30,18 @@ import com.mowakib.radio.database.FavDatabaseRadio
 import com.mowakib.radio.database.RadiosDatabase
 import com.mowakib.radio.database.getRadioDatabase
 import com.mowakib.radio.databinding.ActivityMainBinding
-import com.mowakib.radio.mediation.MediationObserver
-import com.mowakib.radio.services.Variables
-import com.mowakib.radio.services.registerNetworkCallback
-import com.mowakib.radio.utils.*
+import com.mowakib.radio.model.Radio
+import com.mowakib.radio.utils.blurImage
+import com.mowakib.radio.utils.loadImage
+import com.mowakib.radio.utils.slideDown
+import com.mowakib.radio.utils.slideUp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     private lateinit var mainViewModel: MainViewModel
 
@@ -52,33 +51,41 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var database: RadiosDatabase
     private lateinit var emp: Emp
 
-    private lateinit var navigationView: NavigationView
+    private lateinit var navView: NavigationView
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var playerView: StyledPlayerView
+    private lateinit var playerContainer: MaterialCardView
     private lateinit var recyclerView: RecyclerView
     private lateinit var favRecyclerView: RecyclerView
+    private lateinit var playerView: StyledPlayerView
+    private lateinit var radioLogoBig: ImageFilterView
 
+    private lateinit var appBarLayout: AppBarLayout
+    private lateinit var toolbarLayout: CollapsingToolbarLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-
-        navigationView = binding.navView
-        drawerLayout = binding.drawerLayout
-        playerView = binding.appBarMain.playerView
-        recyclerView = binding.appBarMain.contentMain.recyclerView
-        favRecyclerView = binding.appBarMain.contentMain.favRecyclerView
-
-        database = getRadioDatabase(applicationContext)
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        binding.appBarMain.contentMain.lifecycleOwner = this@MainActivity
-        binding.appBarMain.contentMain.viewModel = mainViewModel
 
+        binding = ActivityMainBinding.inflate(layoutInflater).apply {
+            appBarMain.contentMain.viewModel = mainViewModel
+            appBarMain.contentMain.lifecycleOwner = this@MainActivity
+//        lifecycle.addObserver(MediationObserver(this))
 
-        lifecycle.addObserver(MediationObserver(this))
+            this@MainActivity.navView = navView
+            this@MainActivity.drawerLayout = drawerLayout
+
+            playerView = appBarMain.playerView
+            appBarLayout = appBarMain.appBar
+            radioLogoBig = appBarMain.radioLogoBig
+            toolbarLayout = appBarMain.toolbarLayout
+            playerContainer = appBarMain.playerContainer
+            recyclerView = appBarMain.contentMain.recyclerView
+            favRecyclerView = appBarMain.contentMain.favRecyclerView
+            setContentView(root)
+        }
+
+        database = getRadioDatabase(applicationContext)
 
         emp = Emp.get().init(this, playerView)
 
@@ -106,27 +113,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
         drawerLayout.addDrawerListener(toggle)
-//        toggle.isDrawerIndicatorEnabled = true
         toggle.syncState()
-        navigationView.setNavigationItemSelectedListener(this)
+        navView.setNavigationItemSelectedListener(this)
+        radioLogoBig.loadImage(BG)
 
-        switchToDark()
 
-
-        //----
-        checkConn()
-
-    }
-
-    private fun checkConn() {
-        registerNetworkCallback()
-        if (Variables.isNetworkConnected) {
-            // Internet Connected
-            Toast.makeText(this, "connected", Toast.LENGTH_SHORT).show()
-        } else {
-            // Not Connected
-            Toast.makeText(this, "lost", Toast.LENGTH_SHORT).show()
+        toolbarLayout.setOnDragListener { v, event ->
+            Toast.makeText(this, "${event.result}", Toast.LENGTH_SHORT).show()
+            return@setOnDragListener true
         }
+
     }
 
     public override fun onStart() {
@@ -134,148 +130,114 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         bind()
     }
 
-    private fun switchToDark() {
-        val switch =
-            navigationView.getHeaderView(0).findViewById<SwitchMaterial>(R.id.switch_to_dark)
-
-        val isDark = getDarkMode(IS_DARK_MODE)
-        if (isDark) {
-            Toast.makeText(this, "$isDark", Toast.LENGTH_SHORT).show()
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            Toast.makeText(this, "$isDark", Toast.LENGTH_SHORT).show()
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-
-        switch.isChecked = isDark
-        switch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                Toast.makeText(this, "$isChecked", Toast.LENGTH_SHORT).show()
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                saveDarkMode(IS_DARK_MODE, isChecked)
-            } else {
-                Toast.makeText(this, "$isChecked", Toast.LENGTH_SHORT).show()
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                saveDarkMode(IS_DARK_MODE, isChecked)
-            }
-        }
+    override fun onPause() {
+        super.onPause()
+        emp.pause()
+        playerContainer.slideDown()
     }
 
-    fun bind() {
+    override fun onStop() {
+        super.onStop()
+        emp.stop()
+    }
 
-        mainViewModel.radios.observe(this, { radios ->
-            radios?.apply {
+    override fun onDestroy() {
+        super.onDestroy()
+        emp.destroy()
+        lifecycleScope.cancel()
+    }
+
+    private fun bind() {
+
+        mainViewModel.radios.observe(this, Observer { radios ->
+            radios.apply {
                 radioAdapter?.radios = radios
             }
         })
-        mainViewModel.favRadios.observe(this, { favRadios ->
-            if (favRadios.isNotEmpty()) {
-                favRadios?.apply {
-                    favRadioAdapter?.favRadio = favRadios
-                }
+
+        mainViewModel.favRadios.observe(this, Observer { favRadios ->
+            Toast.makeText(this, "${favRadios.size}", Toast.LENGTH_SHORT).show()
+            favRadios.apply {
+                favRadioAdapter?.favRadio = favRadios
             }
         })
 
         recyclerView.apply {
+            setHasFixedSize(false)
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = radioAdapter
         }
         favRecyclerView.apply {
-            layoutManager = GridLayoutManager(this@MainActivity, 5)
+            setHasFixedSize(false)
+            layoutManager =
+                LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = favRadioAdapter
         }
     }
 
-    private fun addRadioToFavorite(name: String, logo: String, url: String, fav: MaterialCheckBox) {
+    private fun addRadioToFavorite(radio: FavDatabaseRadio, fav: MaterialCheckBox) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val isFav = database.radioDao.isFav(logo)
+            val isFav = database.radioDao.isFav(radio.logo)
             fav.isChecked = isFav
-
-            val most = database.radioDao.getMost(logo)
 
             fav.setOnClickListener {
                 lifecycleScope.launch(Dispatchers.IO) {
                     if (fav.isChecked) {
-                        database.radioDao.insert(FavDatabaseRadio(name, logo, url, 0))
+                        database.radioDao.insert(radio)
                     } else {
-                        database.radioDao.delete(FavDatabaseRadio(name, logo, url, most))
+                        database.radioDao.delete(radio)
                     }
                 }
             }
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        lifecycleScope.cancel()
-        emp.stop()
-    }
-
     private fun getRadioAdapter() =
-        RadioAdapter(RadioClick { radio ->
-            playerView.slideUp()
-
-            playerView.findViewById<TextView>(R.id.radio_name).apply {
-                text = radio.name
-                isSelected = true
-            }
-            playerView.findViewById<AppCompatImageView>(R.id.radio_logo).apply {
-                loadImage(radio.logo)
-            }
-
-            playerView.findViewById<AppCompatImageView>(R.id.close_radio).apply {
-                setOnClickListener {
-                    emp.apply {
-                        playerView.slideDown()
-                        stop()
-                        destroy()
-                    }
-                }
-            }
-
-            val fav = playerView.findViewById<MaterialCheckBox>(R.id.radio_fav)
-            addRadioToFavorite(radio.name, radio.logo, radio.url, fav)
-            emp.load(radio.url)
-        })
+        RadioAdapter(RadioClick { radio -> playAndStoreToFav(radio) })
 
     private fun getFavRadioAdapter() =
-        FavRadioAdapter(RadioClick { radio ->
-            playerView.slideUp().fadeUp()
+        FavRadioAdapter(RadioClick { radio -> playAndStoreToFav(radio) })
 
-            playerView.findViewById<TextView>(R.id.radio_name).apply {
-                text = radio.name
-                isSelected = true
-            }
-            playerView.findViewById<AppCompatImageView>(R.id.radio_logo).apply {
-                lifecycleScope.launchWhenResumed {
-                    delay(100)
-                    loadImage(radio.logo)
+    private fun playAndStoreToFav(radio: Radio) {
+        radioLogoBig.blurImage(radio.logo)
+        toolbarLayout.title = radio.name
+
+        playerContainer.slideUp()
+
+        playerView.findViewById<TextView>(R.id.radio_name).apply {
+            text = radio.name
+            isSelected = true
+        }
+        playerView.findViewById<AppCompatImageView>(R.id.radio_logo).loadImage(radio.logo)
+
+
+        playerView.findViewById<AppCompatImageView>(R.id.close_radio).apply {
+            setOnClickListener {
+                emp.apply {
+                    playerContainer.slideDown()
+                    stop()
+                    destroy()
                 }
+                radioLogoBig.loadImage(BG)
+                toolbarLayout.title = resources.getString(R.string.app_name)
+
             }
+        }
 
-            playerView.findViewById<AppCompatImageView>(R.id.close_radio).apply {
-                setOnClickListener {
-                    emp.apply {
-                        playerView.slideDown().fadeDown()
-                        stop()
-                        destroy()
-                    }
-                }
-            }
-
-            val fav = playerView.findViewById<MaterialCheckBox>(R.id.radio_fav)
-            addRadioToFavorite(radio.name, radio.logo, radio.url, fav)
-            emp.load(radio.url)
-        })
-
-    override fun onSupportNavigateUp(): Boolean {
-        return super.onSupportNavigateUp()
+        val fav = playerView.findViewById<MaterialCheckBox>(R.id.radio_fav)
+        addRadioToFavorite(FavDatabaseRadio(radio.name, radio.logo, radio.url), fav)
+        emp.load(radio.url)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_home -> Toast.makeText(this, "0", Toast.LENGTH_SHORT).show()
+
         }
         return true
+    }
+
+    companion object {
+        private const val BG =
+            "https://i.pinimg.com/originals/a9/44/e1/a944e15bf25e4a4d167b8f6b845913c8.jpg"
     }
 }

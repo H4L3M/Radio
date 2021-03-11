@@ -10,7 +10,7 @@ fun NetworkRadioContainer.asDatabaseModel(): Array<DatabaseRadio> {
         DatabaseRadio(
             name = it.name,
             logo = it.logo,
-            url = it.url,
+            url = it.url
         )
     }.toTypedArray()
 }

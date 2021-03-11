@@ -17,22 +17,21 @@ class FavRadioAdapter(private val callback: RadioClick) :
     }
 
     override fun onBindViewHolder(holder: FavRadioViewHolder, position: Int) {
-        try {
+
             holder.binding.also {
                 it.radio = favRadio[position]
                 it.radioCallback = callback
             }
-        } catch (e: Exception) {
-        }
+
     }
 
-    override fun onCurrentListChanged(
-        previousList: MutableList<Radio>,
-        currentList: MutableList<Radio>
-    ) {
-        super.onCurrentListChanged(previousList, currentList)
-        if (currentList != previousList) {
-            notifyDataSetChanged()
-        }
-    }
+//    override fun onCurrentListChanged(
+//        previousList: MutableList<Radio>,
+//        currentList: MutableList<Radio>
+//    ) {
+//        super.onCurrentListChanged(previousList, currentList)
+//        if (currentList != previousList) {
+//            notifyDataSetChanged()
+//        }
+//    }
 }

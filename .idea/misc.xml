@@ -4,19 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable-anydpi-v24/ic_launcher_foreground.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable-night/ic_bg.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable-night/ic_dark.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/bg_logo.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/bg_main.xml" value="0.20052083333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/bg_player.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/bg_player.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/bg_seco.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_bg.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_cancel.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_close.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_dark_mode.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_drawer_menu.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_favorite.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_favorite_filled.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_favorite_outlined.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_home.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.15462962962962962" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_light_mode.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_menu_camera.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_menu_settings.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_next.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_pause.xml" value="0.20052083333333334" />
@@ -25,25 +32,35 @@
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_stop.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/line.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/line_divider.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/selected_card_radio.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/drawable/side_nav_bar.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/_fav_radio_item.xml" value="0.17302052785923755" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/_radio_item.xml" value="0.3962962962962963" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/_radio_item.xml" value="0.184375" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/activity_main.xml" value="0.10833333333333334" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/app_bar_main.xml" value="0.184375" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/content_main.xml" value="0.22333333333333336" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/app_bar_main.xml" value="0.22333333333333336" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/exo_audio_player.xml" value="0.25" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/fav_recycler.xml" value="0.14629629629629629" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/fragment_fav_radio.xml" value="0.184375" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/fragment_radio.xml" value="0.184375" />
-        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/nav_header_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/menu_bottom_sheet_dialog_layout.xml" value="0.184375" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/nav_header_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/radio_item.xml" value="0.184375" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/settings_activity.xml" value="0.184375" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/splash_screen.xml" value="0.1703125" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/layout/switch_item.xml" value="0.184375" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/menu/activity_main_drawer.xml" value="0.184375" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/menu/dark_theme_bottom_sheet_menu.xml" value="0.184375" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/menu/main.xml" value="0.184375" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/menu/switch_theme_menu.xml" value="0.184375" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15462962962962962" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15462962962962962" />
         <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/xml/network_security_config.xml" value="0.184375" />
-        <entry key="..\:/Users/hp/Desktop/Mowakib/Radio/app/src/main/res/drawable/ic_drawer_menu.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/H A L E M/Desktop/Mowakib/Radio/app/src/main/res/xml/root_preferences.xml" value="0.184375" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -1,54 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.main.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mowakib.radio.ui.main.MainViewModel" />
+    </data>
+
+
+    <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:background="@null"
-        android:fitsSystemWindows="true"
-        android:theme="@style/Theme.Radio.AppBarOverlay"
-        app:elevation="0dp">
+        android:layout_height="match_parent"
+        tools:context=".ui.main.MainActivity">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/radio_logo_big"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="@color/grey_300"
-            app:layout_scrollFlags="snap|scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:background="@null"
+            android:theme="@style/Theme.Radio.AppBarOverlay"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/Theme.Radio.PopupOverlay" />
+                android:layout_height="match_parent"
+                app:collapsedTitleGravity="center"
+                app:layout_scrollFlags="snap|scroll|exitUntilCollapsed|snapMargins"
+                app:title="@string/app_name"
+                app:titleEnabled="true"
+                app:toolbarId="@+id/toolbar">
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@null"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/Theme.Radio.PopupOverlay" />
 
-    <include
-        android:id="@+id/content_main"
-        layout="@layout/content_main" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-    <com.google.android.exoplayer2.ui.StyledPlayerView
-        android:id="@+id/player_view"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_gravity="bottom"
-        android:background="?colorPrimary"
-        android:visibility="gone"
-        app:auto_show="true"
-        app:controller_layout_id="@layout/exo_audio_player"
-        app:hide_on_touch="false"
-        app:show_timeout="0"
-        app:use_sensor_rotation="true" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <include
+            android:id="@+id/content_main"
+            layout="@layout/content_main"
+            app:layout_anchor="@id/app_bar"
+            app:layout_anchorGravity="center" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/player_container"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:visibility="gone"
+            app:cardCornerRadius="@dimen/player_card_corner_radius">
+
+            <com.google.android.exoplayer2.ui.StyledPlayerView
+                android:id="@+id/player_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:auto_show="true"
+                app:controller_layout_id="@layout/exo_audio_player"
+                app:hide_on_touch="false"
+                app:show_timeout="0"
+                app:use_sensor_rotation="true" />
+        </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
+</layout>

@@ -12,7 +12,7 @@ interface RadioDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg radios: DatabaseRadio)
 
-    @Query("SELECT * FROM favdatabaseradio ORDER BY most ASC")
+    @Query("SELECT * FROM favdatabaseradio")
     fun getFavRadios(): LiveData<List<FavDatabaseRadio>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -23,9 +23,6 @@ interface RadioDao {
 
     @Query("SELECT EXISTS (SELECT 1 FROM favdatabaseradio WHERE logo = :logo)")
     fun isFav(logo: String): Boolean
-
-    @Query("SELECT EXISTS (SELECT most FROM favdatabaseradio WHERE logo = :logo)")
-    fun getMost(logo: String): Long
 
     @Update
     fun update(radio: FavDatabaseRadio)
@@ -44,7 +41,7 @@ fun getRadioDatabase(context: Context): RadiosDatabase {
             INSTANCE = Room.databaseBuilder(
                 context.applicationContext,
                 RadiosDatabase::class.java,
-                "videos"
+                "radios"
             ).build()
         }
     }

@@ -53,7 +53,6 @@ fun Context.registerNetworkCallback() {
 }
 
 object Variables {
-    // Global variable used to store network state
     var isNetworkConnected = false
 }
 

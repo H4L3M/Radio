@@ -3,6 +3,8 @@ package com.mowakib.radio
 import android.app.Application
 import android.os.Build
 import androidx.work.*
+import com.mowakib.radio.utils.isDark
+import com.mowakib.radio.utils.switchTheme
 import com.mowakib.radio.work.RefreshDataWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -45,5 +47,6 @@ class RadioApp : Application() {
     override fun onCreate() {
         super.onCreate()
         delayedInit()
+        //switchTheme(true)
     }
 }

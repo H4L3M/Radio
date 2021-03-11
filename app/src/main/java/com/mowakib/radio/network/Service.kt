@@ -18,7 +18,7 @@ object Network {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
-    val radio = retrofit.create(RadioService::class.java)!!
+    val radio: RadioService = retrofit.create(RadioService::class.java)
 }
 
 private const val BASE_URL = "https://raw.githubusercontent.com/"

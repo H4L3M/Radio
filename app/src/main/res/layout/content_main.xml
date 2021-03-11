@@ -10,93 +10,93 @@
             type="com.mowakib.radio.ui.main.MainViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:background="@drawable/bg_main"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:showIn="@layout/activity_main">
 
-        <androidx.core.widget.NestedScrollView
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:goneIfNotNull="@{viewModel.radios}" />
+
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false">
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center|center_horizontal"
+                android:padding="@dimen/recycler_view_title_padding"
+                android:text="@string/favorite_radios"
+                android:textColor="@color/white"
+                android:textSize="@dimen/simple_text_size"
+                app:goneIfNull="@{viewModel.favRadios}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_main"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:goneIfNull="@{viewModel.favRadios}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fav_recycler_view"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:goneIfNull="@{viewModel.favRadios}"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center|center_horizontal"
-                        android:padding="4dp"
-                        android:text="@string/favorite_radios"
-                        android:textSize="18sp" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/fav_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clipToPadding="false"
-                        android:orientation="horizontal"
-                        android:paddingStart="14dp"
-                        android:paddingEnd="14dp"
-                        app:listData="@{viewModel.favRadios}"
-                        tools:itemCount="12"
-                        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/_fav_radio_item" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/radio_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_seco"
-                    android:elevation="8dp"
-                    android:orientation="vertical"
-                    android:paddingTop="8dp"
-                    android:visibility="visible">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center|center_horizontal"
-                        android:padding="8dp"
-                        android:singleLine="true"
-                        android:text="@string/all_radios"
-                        android:textSize="18sp" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clipToPadding="false"
-                        android:paddingBottom="?actionBarSize"
-                        app:listData="@{viewModel.radios}"
-                        tools:itemCount="12"
-                        tools:listitem="@layout/_radio_item" />
-                </LinearLayout>
-
+                    android:clipToPadding="false"
+                    android:isScrollContainer="true"
+                    android:nestedScrollingEnabled="true"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/simple_recycler_padding"
+                    android:paddingEnd="@dimen/simple_recycler_padding"
+                    app:listData="@{viewModel.favRadios}"
+                    tools:itemCount="2"
+                    tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/_fav_radio_item" />
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:goneIfNotNull="@{viewModel.radios}"
-            android:background="@color/amber_800"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center|center_horizontal"
+                android:padding="@dimen/recycler_view_title_padding"
+                android:singleLine="true"
+                android:text="@string/all_radios"
+                android:textColor="@color/white"
+                android:textSize="@dimen/simple_text_size" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/simple_recycler_bottom_padding"
+                app:listData="@{viewModel.radios}"
+                tools:itemCount="12"
+                tools:listitem="@layout/_radio_item" />
+
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+    </FrameLayout>
 </layout>
