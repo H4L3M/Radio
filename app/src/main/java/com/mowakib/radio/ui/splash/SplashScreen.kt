@@ -4,20 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.mowakib.radio.databinding.SplashScreenBinding
+import com.mowakib.radio.R
 import com.mowakib.radio.ui.main.MainActivity
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 
 class SplashScreen : AppCompatActivity() {
 
-    private lateinit var binding: SplashScreenBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = SplashScreenBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.splash_screen)
 
         lifecycleScope.launchWhenCreated {
             delay(0)

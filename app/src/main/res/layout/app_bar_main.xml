@@ -14,14 +14,8 @@
     <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         tools:context=".ui.main.MainActivity">
-
-        <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/radio_logo_big"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -35,7 +29,7 @@
                 android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:collapsedTitleGravity="center"
+                app:collapsedTitleGravity="start"
                 app:layout_scrollFlags="snap|scroll|exitUntilCollapsed|snapMargins"
                 app:title="@string/app_name"
                 app:titleEnabled="true"

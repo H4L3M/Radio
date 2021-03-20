@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <drawable name="ic_launcher_background">@mipmap/ic_launcher_background</drawable>
+    <color name="ic_launcher_background">#00ACEA</color>
 </resources>

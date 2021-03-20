@@ -8,9 +8,10 @@ data class NetworkRadioContainer(val radios: List<Radio>)
 fun NetworkRadioContainer.asDatabaseModel(): Array<DatabaseRadio> {
     return radios.map {
         DatabaseRadio(
+            id = it.id,
             name = it.name,
             logo = it.logo,
-            url = it.url
+            flux = it.flux
         )
     }.toTypedArray()
 }

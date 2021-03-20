@@ -5,7 +5,7 @@ import com.mowakib.radio.model.Radio
 
 object DiffCallback : DiffUtil.ItemCallback<Radio>() {
     override fun areItemsTheSame(oldItem: Radio, newItem: Radio): Boolean {
-        return  newItem.logo == oldItem.logo
+        return  newItem.id == oldItem.id
     }
 
     override fun areContentsTheSame(oldItem: Radio, newItem: Radio): Boolean {

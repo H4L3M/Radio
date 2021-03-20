@@ -9,8 +9,16 @@
     android:keepScreenOn="true"
     tools:openDrawer="start">
 
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/radio_logo_big"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
     <com.google.android.material.circularreveal.CircularRevealLinearLayout
         android:id="@+id/holder"
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

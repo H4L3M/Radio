@@ -28,6 +28,7 @@
     <dimen name="simple_card_radius">16dp</dimen>
     <dimen name="player_logo_size">40dp</dimen>
     <dimen name="player_card_corner_radius">26dp</dimen>
+    <dimen name="player_logo_card_corner_radius">20dp</dimen>
 
     <dimen name="radio_logo_size">48dp</dimen>
 
@@ -38,4 +39,8 @@
     <dimen name="bg_main_corner_size">24dp</dimen>
     <dimen name="recycler_view_title_padding">8dp</dimen>
     <dimen name="player_logo_margin_start">8dp</dimen>
+    <dimen name="card_fav_radio_corner_radius">24dp</dimen>
+    <dimen name="card_radio_corner_radius">16dp</dimen>
+    <dimen name="radio_card_logo_size">42dp</dimen>
+    <dimen name="card_round">28dp</dimen>
 </resources>

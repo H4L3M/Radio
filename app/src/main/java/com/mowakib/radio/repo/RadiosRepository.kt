@@ -3,26 +3,25 @@ package com.mowakib.radio.repo
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import androidx.paging.PagedList
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import com.mowakib.radio.database.RadiosDatabase
-import com.mowakib.radio.database.asDomainModel
-import com.mowakib.radio.database.asFavDomainModel
+import com.mowakib.radio.database.asRadio
+import com.mowakib.radio.database.asFavorite
 import com.mowakib.radio.model.Radio
 import com.mowakib.radio.network.Network
 import com.mowakib.radio.network.asDatabaseModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class RadiosRepository(private val database: RadiosDatabase) {
 
     val radios: LiveData<List<Radio>> =
         Transformations.map(database.radioDao.getRadios()) {
-            it.asDomainModel()
+            it.asRadio()
         }
 
     val favRadios: LiveData<List<Radio>> =
         Transformations.map(database.radioDao.getFavRadios()) {
-            it.asFavDomainModel()
+            it.asFavorite()
         }
 
     suspend fun refreshRadios() {

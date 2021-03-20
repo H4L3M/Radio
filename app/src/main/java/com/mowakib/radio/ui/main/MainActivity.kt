@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,10 +29,7 @@ import com.mowakib.radio.database.RadiosDatabase
 import com.mowakib.radio.database.getRadioDatabase
 import com.mowakib.radio.databinding.ActivityMainBinding
 import com.mowakib.radio.model.Radio
-import com.mowakib.radio.utils.blurImage
-import com.mowakib.radio.utils.loadImage
-import com.mowakib.radio.utils.slideDown
-import com.mowakib.radio.utils.slideUp
+import com.mowakib.radio.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -70,14 +65,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater).apply {
             appBarMain.contentMain.viewModel = mainViewModel
             appBarMain.contentMain.lifecycleOwner = this@MainActivity
-//        lifecycle.addObserver(MediationObserver(this))
+//            lifecycle.addObserver(MediationObserver(this@MainActivity, lifecycleScope))
 
             this@MainActivity.navView = navView
             this@MainActivity.drawerLayout = drawerLayout
+            this@MainActivity.radioLogoBig = radioLogoBig
 
             playerView = appBarMain.playerView
             appBarLayout = appBarMain.appBar
-            radioLogoBig = appBarMain.radioLogoBig
             toolbarLayout = appBarMain.toolbarLayout
             playerContainer = appBarMain.playerContainer
             recyclerView = appBarMain.contentMain.recyclerView
@@ -115,13 +110,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
-        radioLogoBig.loadImage(BG)
-
-
-        toolbarLayout.setOnDragListener { v, event ->
-            Toast.makeText(this, "${event.result}", Toast.LENGTH_SHORT).show()
-            return@setOnDragListener true
-        }
+        radioLogoBig.loadBlurBg(BG)
 
     }
 
@@ -149,14 +138,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun bind() {
 
-        mainViewModel.radios.observe(this, Observer { radios ->
+        mainViewModel.radios.observe(this, { radios ->
             radios.apply {
                 radioAdapter?.radios = radios
             }
         })
 
-        mainViewModel.favRadios.observe(this, Observer { favRadios ->
-            Toast.makeText(this, "${favRadios.size}", Toast.LENGTH_SHORT).show()
+        mainViewModel.favRadios.observe(this, { favRadios ->
             favRadios.apply {
                 favRadioAdapter?.favRadio = favRadios
             }
@@ -199,7 +187,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         FavRadioAdapter(RadioClick { radio -> playAndStoreToFav(radio) })
 
     private fun playAndStoreToFav(radio: Radio) {
-        radioLogoBig.blurImage(radio.logo)
+        radioLogoBig.loadBlurBg(radio.logo)
+
         toolbarLayout.title = radio.name
 
         playerContainer.slideUp()
@@ -218,15 +207,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     stop()
                     destroy()
                 }
-                radioLogoBig.loadImage(BG)
+                radioLogoBig.loadBlurBg(BG)
                 toolbarLayout.title = resources.getString(R.string.app_name)
-
             }
         }
 
         val fav = playerView.findViewById<MaterialCheckBox>(R.id.radio_fav)
-        addRadioToFavorite(FavDatabaseRadio(radio.name, radio.logo, radio.url), fav)
-        emp.load(radio.url)
+        radio.apply {
+            addRadioToFavorite(FavDatabaseRadio(id, name, logo, flux, isFav), fav)
+        }
+        emp.load(radio.flux)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -238,6 +228,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     companion object {
         private const val BG =
-            "https://i.pinimg.com/originals/a9/44/e1/a944e15bf25e4a4d167b8f6b845913c8.jpg"
+            "https://images.unsplash.com/" +
+                    "photo-1516429228470-08020c1e94fa?" +
+                    "ixid=MXwxMjA3fDB8MHxwaG90by1wYWdl" +
+                    "fHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&" +
+                    "auto=format&fit=crop&w=934&q=80"
     }
 }

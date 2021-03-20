@@ -5,19 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
     android:layout_gravity="bottom"
+    tools:viewBindingIgnore="true"
     android:background="@drawable/bg_player">
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:layout_width="@dimen/radio_card_logo_size"
+        android:layout_height="@dimen/radio_card_logo_size"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/radio_logo"
-        android:layout_width="@dimen/player_logo_size"
-        android:layout_height="@dimen/player_logo_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="@dimen/player_logo_margin_start"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:roundPercent="1"
-        app:srcCompat="@color/black_950" />
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/radio_name"

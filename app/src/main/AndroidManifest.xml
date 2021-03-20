@@ -19,14 +19,6 @@
         android:theme="@style/Theme.Radio"
         tools:targetApi="n">
         <activity
-            android:name=".ui.SettingsActivity"
-            android:exported="true"
-            android:label="@string/title_activity_settings">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main.MainActivity" />
-        </activity>
-        <activity
             android:name=".ui.splash.SplashScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"

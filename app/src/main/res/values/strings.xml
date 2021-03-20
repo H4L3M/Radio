@@ -1,90 +1,16 @@
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
-    <string name="track_selection_title">Select tracks</string>
-
-    <string name="unexpected_intent_action">Unexpected intent action: <xliff:g id="action">%1$s</xliff:g></string>
-
-    <string name="error_cleartext_not_permitted">Cleartext HTTP traffic not permitted. See https://exoplayer.dev/issues/cleartext-not-permitted</string>
-
-    <string name="error_generic">Playback failed</string>
-
-    <string name="error_drm_unsupported_before_api_18">DRM content not supported on API levels below 18</string>
-
-    <string name="error_drm_unsupported_scheme">This device does not support the required DRM scheme</string>
-
-    <string name="error_no_decoder">This device does not provide a decoder for <xliff:g id="mime_type">%1$s</xliff:g></string>
-
-    <string name="error_no_secure_decoder">This device does not provide a secure decoder for <xliff:g id="mime_type">%1$s</xliff:g></string>
-
-    <string name="error_querying_decoders">Unable to query device decoders</string>
-
-    <string name="error_instantiating_decoder">Unable to instantiate decoder <xliff:g id="decoder_name">%1$s</xliff:g></string>
-
-    <string name="error_unsupported_video">Media includes video tracks, but none are playable by this device</string>
-
-    <string name="error_unsupported_audio">Media includes audio tracks, but none are playable by this device</string>
-
-    <string name="storage_permission_denied">Permission to access storage was denied</string>
-
-    <string name="sample_list_load_error">One or more sample lists failed to load</string>
-
-    <string name="download_start_error">Failed to start download</string>
-
-    <string name="download_start_error_offline_license">Failed to obtain offline license</string>
-
-    <string name="download_playlist_unsupported">This demo app does not support downloading playlists</string>
-
-    <string name="download_scheme_unsupported">This demo app only supports downloading http streams</string>
-
-    <string name="download_live_unsupported">This demo app does not support downloading live content</string>
-
-    <string name="download_ads_unsupported">IMA does not support offline ads</string>
-
-    <string name="prefer_extension_decoders">Prefer extension decoders</string>
-
-
+<resources>
+    <!--App-->
     <string name="app_name">Radio</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="title_activity_start">StartActivity</string>
-    <string name="tab_text_1">List Radios</string>
-    <string name="tab_text_2">Favorite</string>
+    <!--Navigation Drawer-->
+    <string name="nav_share">Share</string>
+    <string name="nav_facebook">Facebook</string>
+    <string name="nav_youtube">Youtube</string>
+
+    <!--Main Activity-->
     <string name="favorite_radios">Favorite Radios</string>
     <string name="all_radios">All Radios</string>
-    <string name="enable_dark_mode">Enable Dark Mode</string>
-    <string name="title_activity_splash_screen">SplashScreen</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="wifi_connected">connected</string>
-    <string name="lost_connection">lost connection</string>
-    <string name="dark_theme">Dark theme</string>
-    <string name="menu_theme_follow_system">Follow system</string>
-    <string name="menu_theme_light">Light</string>
-    <string name="menu_theme_dark">Dark</string>
-    <string name="title_activity_settings">SettingsActivity</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="menu_settings">Settings</string>
-    <string name="is_dark" translatable="false">is_dark</string>
 </resources>

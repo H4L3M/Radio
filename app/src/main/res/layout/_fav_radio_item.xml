@@ -14,30 +14,17 @@
             type="com.mowakib.radio.adapter.RadioClick" />
     </data>
 
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
+    <androidx.constraintlayout.utils.widget.ImageFilterView
         android:layout_width="?actionBarSize"
+        android:id="@+id/radio_fav_logo"
         android:layout_height="?actionBarSize"
         android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
         android:layout_marginBottom="@dimen/simple_card_margin_bottom"
-        android:layout_marginTop="@dimen/simple_card_margin_bottom"
+        android:layout_marginEnd="4dp"
         android:onClick="@{() -> radioCallback.onClick(radio)}"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="0dp">
-
-        <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/radio_logo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/bg_logo"
-            android:scaleType="centerCrop"
-            app:roundPercent="1"
-            app:glideSrc="@{radio.logo}"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-    </com.google.android.material.card.MaterialCardView>
+        android:scaleType="centerCrop"
+        app:glideSrc="@{radio.logo}"
+        app:roundPercent="1"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </layout>
