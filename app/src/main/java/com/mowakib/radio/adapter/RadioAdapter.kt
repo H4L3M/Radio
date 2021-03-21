@@ -1,13 +1,12 @@
 package com.mowakib.radio.adapter
 
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.ListAdapter
 import com.mowakib.radio.adapter.RadioViewHolder.Companion.from
 import com.mowakib.radio.model.Radio
 
-class RadioAdapter(private val callback: RadioClick) :
-    ListAdapter<Radio, RadioViewHolder>(DiffCallback) {
+class RadioAdapter(private val callback: ItemClick<Radio>) :
+    ListAdapter<Radio, RadioViewHolder>(RadioCallback) {
 
     var radios: List<Radio> = emptyList()
         set(value) {
@@ -28,7 +27,7 @@ class RadioAdapter(private val callback: RadioClick) :
     override fun onBindViewHolder(holder: RadioViewHolder, position: Int) {
         holder.binding.also {
             it.radio = radios[position]
-            it.radioCallback = callback
+            it.callback = callback
         }
     }
 }

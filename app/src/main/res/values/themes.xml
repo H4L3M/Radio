@@ -18,6 +18,8 @@
 
         <item name="android:colorBackground">@color/bg_dark</item>
 
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
     </style>
 
     <style name="Theme.Radio.NoActionBar">
@@ -31,4 +33,21 @@
 
     <style name="Theme.Radio.SplashScreen" parent="Theme.Radio.NoActionBar" />
 
+    <!--  Modal  -->
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+<!--        <item name="android:textViewStyle">@style/Theme.Nokhba.Dark.TextStyle</item>-->
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_main</item>
+        <item name="behavior_peekHeight">512dp</item>
+        <item name="android:layout_marginTop">@dimen/simple_dimen_s</item>
+        <item name="android:layout_marginStart">@dimen/simple_dimen_s</item>
+        <item name="android:layout_marginLeft">@dimen/simple_dimen_s</item>
+        <item name="android:layout_marginEnd">@dimen/simple_dimen_s</item>
+        <item name="android:layout_marginRight">@dimen/simple_dimen_s</item>
+    </style>
+
+    <dimen name="simple_dimen_s">4dp</dimen>
 </resources>

@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import retrofit2.HttpException
-import com.mowakib.radio.database.getRadioDatabase
-import com.mowakib.radio.repo.RadiosRepository
+import com.mowakib.radio.database.database
+import com.mowakib.radio.repo.AppRepository
 
 class RefreshDataWorker(appContext: Context, params: WorkerParameters) :
         CoroutineWorker(appContext, params) {
@@ -17,10 +17,10 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) :
 
     override suspend fun doWork(): Result {
 
-        val database = getRadioDatabase(applicationContext)
-        val repository = RadiosRepository(database)
+        val database = database(applicationContext)
+        val repository = AppRepository(database)
         return try {
-            repository.refreshRadios()
+            repository.refreshData()
             Log.d(WORK_NAME, "doWork: -----------------------------------------------------")
             Result.success()
         } catch (e: HttpException) {

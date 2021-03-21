@@ -22,11 +22,11 @@ import com.google.android.material.navigation.NavigationView
 import com.mowakib.emp.Emp
 import com.mowakib.radio.R
 import com.mowakib.radio.adapter.FavRadioAdapter
+import com.mowakib.radio.adapter.ItemClick
 import com.mowakib.radio.adapter.RadioAdapter
-import com.mowakib.radio.adapter.RadioClick
+import com.mowakib.radio.database.AppDatabase
 import com.mowakib.radio.database.FavDatabaseRadio
-import com.mowakib.radio.database.RadiosDatabase
-import com.mowakib.radio.database.getRadioDatabase
+import com.mowakib.radio.database.database
 import com.mowakib.radio.databinding.ActivityMainBinding
 import com.mowakib.radio.model.Radio
 import com.mowakib.radio.utils.*
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var radioAdapter: RadioAdapter? = null
     private var favRadioAdapter: FavRadioAdapter? = null
 
-    private lateinit var database: RadiosDatabase
+    private lateinit var database: AppDatabase
     private lateinit var emp: Emp
 
     private lateinit var navView: NavigationView
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             setContentView(root)
         }
 
-        database = getRadioDatabase(applicationContext)
+        database = database(applicationContext)
 
         emp = Emp.get().init(this, playerView)
 
@@ -165,15 +165,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun addRadioToFavorite(radio: FavDatabaseRadio, fav: MaterialCheckBox) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val isFav = database.radioDao.isFav(radio.logo)
+            val isFav = database.favRadioDao.isFav(radio.logo)
             fav.isChecked = isFav
 
             fav.setOnClickListener {
                 lifecycleScope.launch(Dispatchers.IO) {
                     if (fav.isChecked) {
-                        database.radioDao.insert(radio)
+                        database.favRadioDao.insert(radio)
                     } else {
-                        database.radioDao.delete(radio)
+                        database.favRadioDao.delete(radio)
                     }
                 }
             }
@@ -181,10 +181,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun getRadioAdapter() =
-        RadioAdapter(RadioClick { radio -> playAndStoreToFav(radio) })
+        RadioAdapter(ItemClick { radio -> playAndStoreToFav(radio) })
 
     private fun getFavRadioAdapter() =
-        FavRadioAdapter(RadioClick { radio -> playAndStoreToFav(radio) })
+        FavRadioAdapter(ItemClick { radio -> playAndStoreToFav(radio) })
 
     private fun playAndStoreToFav(radio: Radio) {
         radioLogoBig.loadBlurBg(radio.logo)
@@ -221,7 +221,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
+            R.id.nav_share -> shareApp()
+            R.id.nav_communicate -> communicate()
+            R.id.nav_apps -> {
+                drawerLayout.close()
+                moreApps()
+            }
+            R.id.nav_about -> about()
         }
         return true
     }

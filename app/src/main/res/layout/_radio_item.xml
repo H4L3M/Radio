@@ -10,8 +10,8 @@
             type="com.mowakib.radio.model.Radio" />
 
         <variable
-            name="radioCallback"
-            type="com.mowakib.radio.adapter.RadioClick" />
+            name="callback"
+            type="com.mowakib.radio.adapter.ItemClick" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -19,7 +19,7 @@
         android:layout_height="?actionBarSize"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{() -> radioCallback.onClick(radio)}"
+        android:onClick="@{() -> callback.onClick(radio)}"
         android:foreground="?android:attr/selectableItemBackground"
         android:paddingBottom="@dimen/simple_card_margin_bottom"
         app:cardBackgroundColor="@android:color/transparent"
@@ -30,7 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center">
-
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
                 android:id="@+id/radio_logo"

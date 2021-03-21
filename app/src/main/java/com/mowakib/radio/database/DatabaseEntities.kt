@@ -2,6 +2,7 @@ package com.mowakib.radio.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.mowakib.radio.model.PubApp
 import com.mowakib.radio.model.Radio
 
 @Entity
@@ -44,6 +45,24 @@ fun List<FavDatabaseRadio>.asFavorite(): List<Radio> {
             logo = it.logo,
             flux = it.flux,
             isFav = it.isFav
+        )
+    }
+}
+
+@Entity
+data class DatabaseApps constructor(
+    @PrimaryKey
+    val name: String,
+    val logo: String,
+    val url: String
+)
+
+fun List<DatabaseApps>.asApp(): List<PubApp> {
+    return map {
+        PubApp(
+            name = it.name,
+            logo = it.logo,
+            url = it.url
         )
     }
 }

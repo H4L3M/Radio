@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="radio"
-            type="com.mowakib.radio.model.Radio" />
+            name="app"
+            type="com.mowakib.radio.model.PubApp" />
 
         <variable
             name="callback"
@@ -21,9 +21,9 @@
         android:layout_marginStart="4dp"
         android:layout_marginBottom="@dimen/simple_card_margin_bottom"
         android:layout_marginEnd="4dp"
-        android:onClick="@{() -> callback.onClick(radio)}"
+        android:onClick="@{() -> callback.onClick(app)}"
         android:scaleType="centerCrop"
-        app:glideSrc="@{radio.logo}"
+        app:glideSrc="@{app.logo}"
         app:roundPercent="1"
         tools:srcCompat="@tools:sample/avatars" />
 

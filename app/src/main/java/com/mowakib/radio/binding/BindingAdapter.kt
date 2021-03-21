@@ -4,15 +4,25 @@ import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.mowakib.radio.adapter.AppsAdapter
 import com.mowakib.radio.adapter.FavRadioAdapter
 import com.mowakib.radio.adapter.RadioAdapter
+import com.mowakib.radio.model.PubApp
 import com.mowakib.radio.model.Radio
 
 @BindingAdapter("app:listData")
-fun RecyclerView.bindData(listRadio: List<Radio>?) {
+fun RecyclerView.bindRadio(listRadio: List<Radio>?) {
     when (adapter) {
         is RadioAdapter -> (adapter as RadioAdapter).submitList(listRadio)
         is FavRadioAdapter -> (adapter as FavRadioAdapter).submitList(listRadio)
+        else -> throw ExceptionInInitializerError()
+    }
+}
+
+@BindingAdapter("app:listData")
+fun RecyclerView.bindApps(listRadio: List<PubApp>?) {
+    when (adapter) {
+        is AppsAdapter -> (adapter as AppsAdapter).submitList(listRadio)
         else -> throw ExceptionInInitializerError()
     }
 }

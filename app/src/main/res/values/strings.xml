@@ -12,5 +12,7 @@
     <!--Main Activity-->
     <string name="favorite_radios">Favorite Radios</string>
     <string name="all_radios">All Radios</string>
+    <string name="send_message">Download app from here :</string>
+    <string name="share_using">Share Using</string>
 
 </resources>

@@ -1,14 +1,20 @@
 package com.mowakib.radio.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.mowakib.radio.utils.APPS_URL
+import com.mowakib.radio.utils.BASE_URL
+import com.mowakib.radio.utils.COUNTRY_URL
 import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
-interface RadioService {
-    @GET(SPECIFIC_RADIO)
-    fun getRadioPlaylistAsync(): Deferred<NetworkRadioContainer>
+interface DataService {
+    @GET(COUNTRY_URL)
+    fun getRadiosAsync(): Deferred<NetworkRadioContainer>
+
+    @GET(APPS_URL)
+    fun getAppsAsync(): Deferred<NetworkAppsContainer>
 }
 
 object Network {
@@ -18,8 +24,5 @@ object Network {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
-    val radio: RadioService = retrofit.create(RadioService::class.java)
+    val data: DataService = retrofit.create(DataService::class.java)
 }
-
-private const val BASE_URL = "https://raw.githubusercontent.com/"
-private const val SPECIFIC_RADIO = "H4L3M/WorldRadio/main/Test"

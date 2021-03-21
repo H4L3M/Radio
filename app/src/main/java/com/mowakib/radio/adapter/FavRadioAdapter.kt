@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.ListAdapter
 import com.mowakib.radio.adapter.FavRadioViewHolder.Companion.from
 import com.mowakib.radio.model.Radio
 
-class FavRadioAdapter(private val callback: RadioClick) :
-    ListAdapter<Radio, FavRadioViewHolder>(DiffCallback) {
+class FavRadioAdapter(private val callback: ItemClick<Radio>) :
+    ListAdapter<Radio, FavRadioViewHolder>(RadioCallback) {
 
     var favRadio: List<Radio> = emptyList()
 
@@ -19,7 +19,7 @@ class FavRadioAdapter(private val callback: RadioClick) :
     override fun onBindViewHolder(holder: FavRadioViewHolder, position: Int) {
             holder.binding.also {
                 it.radio = favRadio[position]
-                it.radioCallback = callback
+                it.callback = callback
             }
     }
 }

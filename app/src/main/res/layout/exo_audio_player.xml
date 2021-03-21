@@ -45,10 +45,9 @@
         android:id="@+id/radio_fav"
         android:layout_width="@dimen/icon_player_size"
         android:layout_height="@dimen/icon_player_size"
-        android:layout_marginEnd="@dimen/icon_player_margin"
         android:background="@drawable/ic_favorite"
         android:button="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/exo_play_pause"
+        android:layout_margin="@dimen/icon_player_margin"        app:layout_constraintBottom_toBottomOf="@+id/exo_play_pause"
         app:layout_constraintEnd_toStartOf="@+id/exo_play_pause"
         app:layout_constraintTop_toTopOf="@+id/exo_play_pause" />
 
@@ -56,7 +55,7 @@
         android:id="@+id/exo_play_pause"
         android:layout_width="@dimen/icon_player_size"
         android:layout_height="@dimen/icon_player_size"
-        android:layout_marginEnd="@dimen/icon_player_margin"
+        android:layout_margin="@dimen/icon_player_margin"
         app:layout_constraintBottom_toBottomOf="@+id/close_radio"
         app:layout_constraintEnd_toStartOf="@+id/close_radio"
         app:layout_constraintTop_toTopOf="@+id/close_radio"

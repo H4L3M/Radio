@@ -3,7 +3,7 @@ package com.mowakib.radio.adapter
 import androidx.recyclerview.widget.DiffUtil
 import com.mowakib.radio.model.Radio
 
-object DiffCallback : DiffUtil.ItemCallback<Radio>() {
+object RadioCallback : DiffUtil.ItemCallback<Radio>() {
     override fun areItemsTheSame(oldItem: Radio, newItem: Radio): Boolean {
         return  newItem.id == oldItem.id
     }
@@ -12,6 +12,9 @@ object DiffCallback : DiffUtil.ItemCallback<Radio>() {
         return  newItem == oldItem
     }
 }
-class RadioClick(val block: (Radio) -> Unit) {
-    fun onClick(radio: Radio) = block(radio)
+
+
+
+class ItemClick<T>(val block: (T) -> Unit) {
+    fun onClick(t: T) = block(t)
 }
