@@ -11,12 +11,12 @@
 
         <variable
             name="callback"
-            type="com.mowakib.radio.adapter.ItemClick" />
+            type="com.mowakib.radio.utils.ItemClick" />
     </data>
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:layout_width="?actionBarSize"
         android:id="@+id/radio_fav_logo"
+        android:layout_width="?actionBarSize"
         android:layout_height="?actionBarSize"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="@dimen/simple_card_margin_bottom"

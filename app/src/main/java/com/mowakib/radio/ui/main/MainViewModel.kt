@@ -7,7 +7,6 @@ import com.mowakib.radio.database.database
 import com.mowakib.radio.repo.AppRepository
 import kotlinx.coroutines.launch
 
-
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = database(application)

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mowakib.radio.adapter.AppsViewHolder.Companion.from
 import com.mowakib.radio.databinding.AppItemBinding
 import com.mowakib.radio.model.PubApp
+import com.mowakib.radio.utils.ItemClick
 
 class AppsAdapter(private val callback: ItemClick<PubApp>) :
     ListAdapter<PubApp, AppsViewHolder>(AppsCallback) {
@@ -42,7 +43,7 @@ class AppsViewHolder constructor(val binding: AppItemBinding) :
 
 object AppsCallback : DiffUtil.ItemCallback<PubApp>() {
     override fun areItemsTheSame(oldItem: PubApp, newItem: PubApp): Boolean {
-        return newItem.url == oldItem.url
+        return newItem.logo == oldItem.logo
     }
 
     override fun areContentsTheSame(oldItem: PubApp, newItem: PubApp): Boolean {

@@ -19,7 +19,7 @@ fun RecyclerView.bindRadio(listRadio: List<Radio>?) {
     }
 }
 
-@BindingAdapter("app:listData")
+@BindingAdapter("app:listApps")
 fun RecyclerView.bindApps(listRadio: List<PubApp>?) {
     when (adapter) {
         is AppsAdapter -> (adapter as AppsAdapter).submitList(listRadio)

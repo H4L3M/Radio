@@ -12,9 +12,3 @@ object RadioCallback : DiffUtil.ItemCallback<Radio>() {
         return  newItem == oldItem
     }
 }
-
-
-
-class ItemClick<T>(val block: (T) -> Unit) {
-    fun onClick(t: T) = block(t)
-}

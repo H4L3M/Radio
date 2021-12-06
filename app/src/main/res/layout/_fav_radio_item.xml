@@ -11,7 +11,7 @@
 
         <variable
             name="callback"
-            type="com.mowakib.radio.adapter.ItemClick" />
+            type="com.mowakib.radio.utils.ItemClick" />
     </data>
 
     <androidx.constraintlayout.utils.widget.ImageFilterView

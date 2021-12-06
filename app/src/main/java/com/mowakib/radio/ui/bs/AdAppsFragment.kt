@@ -1,6 +1,7 @@
 package com.mowakib.radio.ui.bs
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +11,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mowakib.radio.adapter.AppsAdapter
-import com.mowakib.radio.adapter.ItemClick
 import com.mowakib.radio.databinding.AdAppsFragmentBinding
 import com.mowakib.radio.model.PubApp
+import com.mowakib.radio.utils.ItemClick
 
 class AdAppsFragment : BottomSheetDialogFragment() {
 
@@ -22,26 +23,20 @@ class AdAppsFragment : BottomSheetDialogFragment() {
     private val viewModel: AdAppsViewModel by activityViewModels()
 
     private lateinit var recycler: RecyclerView
-    private lateinit var appsAdapter: AppsAdapter
+    private var appsAdapter: AppsAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+        savedInstanceState: Bundle?): View {
         _binding = AdAppsFragmentBinding.inflate(inflater, container, false).apply {
             this.viewModel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
+
+            recycler = recyclerView
         }
+        val view: View = binding.root
 
-        viewModel.apps.observe(viewLifecycleOwner, {
-            appsAdapter.apps = it
-        })
-
-        appsAdapter = AppsAdapter(ItemClick { app -> downloadApp(app) })
-
-        recycler = binding.recyclerView
-
-        return binding.root
+        return view
     }
 
     private fun downloadApp(app: PubApp) {
@@ -50,12 +45,20 @@ class AdAppsFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        viewModel.apps.observe(viewLifecycleOwner, {
+            it.apply {
+                appsAdapter?.apps = it
+            }
+            Log.d("TAGA", "onCreateView: ${it.size}")
+        })
+
+        appsAdapter = AppsAdapter(ItemClick { app -> downloadApp(app) })
+
         recycler.apply {
-            setHasFixedSize(false)
+            setHasFixedSize(true)
             layoutManager = GridLayoutManager(requireContext(), 6)
             adapter = appsAdapter
         }
-
     }
 
     override fun onDestroyView() {

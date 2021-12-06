@@ -5,8 +5,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:keepScreenOn="true"
+    android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
@@ -40,6 +40,23 @@
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/nav_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:padding="8dp"
+            android:elevation="4dp"
+            android:gravity="start|center"
+            android:text="@string/app_name"
+            app:drawableStartCompat="@drawable/ic_information"
+            app:drawableTint="@color/grey_800"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/grey_800"
+            android:textSize="18sp" />
+
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

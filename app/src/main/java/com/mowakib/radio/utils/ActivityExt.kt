@@ -8,34 +8,32 @@ import com.mowakib.radio.R
 import com.mowakib.radio.ui.bs.AdAppsFragment
 
 //launch activity
-fun Activity.launchActivity(destination: Class<*>): Intent {
+fun Activity.startActivity(destination: Class<*>): Intent {
     val intent = Intent(this, destination)
     startActivity(intent)
     return intent
 }
 
 //launch activity from fragment
-fun Fragment.launchActivity(destination: Class<*>) = activity?.launchActivity(destination)
+fun Fragment.startActivity(destination: Class<Activity>) =
+    activity?.startActivity(destination)
 
+fun AppCompatActivity.shareApp() =
+    chooserIntent(TYPE_TEXT, getString(R.string.send_message))
 
-fun AppCompatActivity.shareApp() {
-    Intent(Intent.ACTION_SEND).apply {
-        type = "text/plain"
-        putExtra("android.intent.extra.TEXT", getString(R.string.send_message))
-        startActivity(Intent.createChooser(this, getString(R.string.share_using)))
-    }
-}
-
-fun AppCompatActivity.communicate() {
-
-}
+fun AppCompatActivity.communicate() =
+    chooserIntent(TYPE_EMAIL, getString(R.string.mail))
 
 fun AppCompatActivity.moreApps() {
     AdAppsFragment.newInstance().apply {
-        show(supportFragmentManager, tag)
+        showNow(supportFragmentManager, tag)
     }
 }
 
-fun AppCompatActivity.about() {
-
+private fun Activity.chooserIntent(mimeType: String, extra: String) {
+    Intent(Intent.ACTION_SEND).apply {
+        type = mimeType
+        putExtra(Intent.EXTRA_EMAIL, extra)
+        startActivity(Intent.createChooser(this, getString(R.string.share_using)))
+    }
 }

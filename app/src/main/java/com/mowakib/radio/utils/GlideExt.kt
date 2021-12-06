@@ -70,7 +70,7 @@ fun ImageView.loadImage(path: String) =
 fun ImageView.blurImage(path: String) =
     if (path.isImgur()) blur("$IMGUR_BASE_URL$path$EXT") else blur(path)
 
-fun View.loadBg(path: String) =
+fun ImageView.loadBg(path: String) =
     Glide.with(this)
         .load(path)
         .fromCache()
@@ -85,4 +85,4 @@ fun View.loadBg(path: String) =
         }
     })
 
-fun View.loadBlurBg(path: String) = if (path.isImgur()) loadBg("$IMGUR_BASE_URL$path$EXT") else loadBg(path)
+fun ImageView.loadBlurBg(path: String) = if (path.isImgur()) loadBg("$IMGUR_BASE_URL$path$EXT") else loadBg(path)

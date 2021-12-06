@@ -20,9 +20,9 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.navigation.NavigationView
 import com.mowakib.emp.Emp
+import com.mowakib.radio.BuildConfig
 import com.mowakib.radio.R
 import com.mowakib.radio.adapter.FavRadioAdapter
-import com.mowakib.radio.adapter.ItemClick
 import com.mowakib.radio.adapter.RadioAdapter
 import com.mowakib.radio.database.AppDatabase
 import com.mowakib.radio.database.FavDatabaseRadio
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //                } else {
                 binding.holder.translationX = slideX
 //                }
-//                binding.holder.scaleX = 1 - slideOffset / 20f
+                binding.holder.scaleX = 1 - slideOffset / 20f
                 binding.holder.scaleY = 1 - slideOffset / 20f
                 super.onDrawerSlide(drawerView, slideOffset)
             }
@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
         radioLogoBig.loadBlurBg(BG)
 
+        binding.navVersion.text = getString(R.string.version, BuildConfig.VERSION_NAME)
     }
 
     public override fun onStart() {
@@ -197,8 +198,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             text = radio.name
             isSelected = true
         }
-        playerView.findViewById<AppCompatImageView>(R.id.radio_logo).loadImage(radio.logo)
 
+        playerView.findViewById<AppCompatImageView>(R.id.radio_logo).loadImage(radio.logo)
 
         playerView.findViewById<AppCompatImageView>(R.id.close_radio).apply {
             setOnClickListener {
@@ -221,13 +222,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_share -> shareApp()
-            R.id.nav_communicate -> communicate()
+            R.id.nav_share -> {
+                drawerLayout.close()
+                shareApp()
+            }
+            R.id.nav_contact_us -> {
+                drawerLayout.close()
+                communicate()
+            }
             R.id.nav_apps -> {
                 drawerLayout.close()
                 moreApps()
             }
-            R.id.nav_about -> about()
         }
         return true
     }

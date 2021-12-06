@@ -10,16 +10,37 @@
             type="com.mowakib.radio.ui.bs.AdAppsViewModel" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/grey_950"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingTop="@dimen/list_item_spacing_half"
-        android:paddingBottom="@dimen/list_item_spacing_half"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:listData="@{viewModel.apps}"
-        tools:context=".ui.bs.AdAppsFragment"
-        tools:itemCount="18"
-        tools:listitem="@layout/_app_item" />
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:gravity="center"
+            android:text="@string/nav_more_apps"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/list_item_spacing_half"
+            android:paddingBottom="@dimen/list_item_spacing_half"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:listApps="@{viewModel.apps}"
+            tools:context=".ui.bs.AdAppsFragment"
+            tools:itemCount="18"
+            tools:listitem="@layout/_app_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
